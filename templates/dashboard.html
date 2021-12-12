@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DashBoard Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!--Link Tab-->
+    <div class="row">
+        <div class="col-2">
+            <h4 class="text-center text-primary">
+                Welcome Admin
+            </h4>
+            <h4 class="text-center text-primary">
+                <a href="{{url_for('logout')}}"class="nav-link">Logout</a>
+            </h4>
+        </div> 
+        <div class="col-10">
+            <div class="row">                     
+                <nav class="navbar navbar-expand-lg col-12" style="background-color:aliceblue" role="navigation">
+                    <div>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="{{url_for('dashboard')}}"class="nav-link" name="dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url_for('imagePurchase')}}" class="nav-link" name="purchase">Purchase</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url_for('equipment')}}" class="nav-link" name="equipment">Equipment</a>
+                            </li>                            
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+  
+    </div>
+
+    <!--Home-->
+    <center><h1>Dashboard for farmers</h1></center>
+    <!--Graph-->
+    <div class="contain">
+            <div id="canvas-holder" style="float:left;">
+            <center><h1>Product Sold</h1></center>
+            <canvas id="myChart" width="600" height="450"></canvas>
+            </div>           
+            <div id="canvas-holder-keymsg" style="float:right;">
+            <center><h1>Total Sales for each product</h1></center>
+            <canvas id="myChart1" width="600" height="450"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="contain">
+        <div id="canvas-holder" style="float:left;">
+        <center><h1>Current Product Inventory</h1></center>
+        <canvas id="myChart2" width="600" height="450"></canvas>
+        </div>        
+        <div id="canvas-holder-keymsg" style="float:right;">
+        <center><h1>Total Sales Vs Equipment Spent</h1></center>
+        <canvas id="myChart3" width="600" height="450"></canvas>
+        </div>
+    </div>
+
+<!--Scripts for dashboard-->
+<!--Graph 1-->
+    <script>
+        var ctx = document.getElementById("myChart");
+        var Barchart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ product | safe }},
+            datasets: [{
+                    label: "Product Solds",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                    data: {{ product_solds | safe }}
+                }]
+                },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Total Product Solds'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+            });
+        </script>
+
+<!--Graph 2-->
+<script>
+    var ctx = document.getElementById("myChart1");
+    var Barchart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ product | safe }},
+        datasets: [{
+                label: "Sales",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                data: {{ product_sales | safe }}
+            }]
+            },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Total Sales Record'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+    </script>
+<!--Graph 3-->
+<script>
+    var ctx = document.getElementById("myChart2");
+    var Barchart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ product | safe }},
+        datasets: [{
+                label: "Product Inventory",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                data: {{ product_inventory | safe }}
+            }]
+            },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Product Inventory'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+    </script>
+
+<!--Graph 4-->
+<script>
+    var ctx = document.getElementById("myChart3");
+    var Barchart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels | safe }},
+        datasets: [{
+                label: "Amount",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                data: {{ value | safe }}
+            }]
+            },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Total Sales Vs Equipment Spent'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+        });
+    </script>
+</body>
+</html>

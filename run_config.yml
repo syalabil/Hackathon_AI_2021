@@ -1,0 +1,10 @@
+nodes:
+- input.recorded:
+      input_dir: "C:/Hackathon_2021_AI/images/apple.jpg"
+- model.yolo:
+    detect_ids: [47,46,49]
+- dabble.bbox_count
+- draw.bbox
+- draw.legend
+- output.media_writer:
+      output_dir: "C:/Hackathon_2021_AI/output"
