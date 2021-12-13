@@ -3,7 +3,7 @@ import rpa as r
 
 def addEquipmentExcel(excel):
     df = pd.read_excel(excel, dtype="str")  
-    r.init(chrome_browser = True)
+    r.init()
     r.url('http://127.0.0.1:5000/')
     r.wait(10)
     r.type('//*[@name="username"]', 'admin')

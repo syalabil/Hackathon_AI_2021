@@ -92,7 +92,7 @@ def dashboard():
 
     return render_template('dashboard.html', 
     product = product , product_solds = product_solds 
-    ,product_inventory=product_inventory,product_sales=product_sales,labels=labels,value=value
+    ,product_inventory=product_inventory,product_sales=product_sales,labels=labels,value=value,
     )
 
 #Peeking Duck System
@@ -178,9 +178,14 @@ def equipment():
 
     cur.execute("SELECT equipment_name,price,quantity FROM equipments")
     equipment = cur.fetchall()
+    total = 0
+    for r in equipment:
+        spent = r[1] * r[2]
+        total += spent
 
 
-    return render_template('equipment.html',equipment=equipment)
+
+    return render_template('equipment.html',equipment=equipment,total=total)
 
 #Add Equipment page
 @app.route('/addequipment')
