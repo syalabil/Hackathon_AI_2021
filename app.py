@@ -187,6 +187,21 @@ def equipment():
 
     return render_template('equipment.html',equipment=equipment,total=total)
 
+#Delete Equipment
+@app.route('/deleteequipment/<int:id>',methods=['GET','POST'])
+def deleteequipment(id):
+    if not g.user:
+        return redirect(url_for('login'))
+    
+    sql = '''DELETE FROM equipments WHERE id=? '''
+    conn = database.create_connection()
+    cur = conn.cursor()
+    cur.execute(sql,(id,))
+    conn.commit()
+  
+    return redirect(url_for('equipment'))
+    
+
 #Add Equipment page
 @app.route('/addequipment')
 def addequipment():
