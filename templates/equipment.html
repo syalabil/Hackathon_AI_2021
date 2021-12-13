@@ -49,6 +49,7 @@
     </div>
     <table class="table table-bordered table-condensed table-hover table-striped">
         <tr>
+            <th>Id</th>
             <th>Equipment Name</th>
             <th>Price</th>
             <th>Quantity</th>
@@ -57,9 +58,10 @@
         {% for r in equipment %}
         <tr>
             <td>{{ r[0] }}</td>
-            <td>${{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
-            <td>${{ r[1] * r[2] }}</td>     
+            <td>{{ r[1] }}</td>
+            <td>${{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>${{ r[2] * r[3] }}</td>     
         </tr>
         {% endfor %}
 

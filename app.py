@@ -176,11 +176,11 @@ def equipment():
     conn = database.create_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT equipment_name,price,quantity FROM equipments")
+    cur.execute("SELECT * FROM equipments")
     equipment = cur.fetchall()
     total = 0
     for r in equipment:
-        spent = r[1] * r[2]
+        spent = r[2] * r[3]
         total += spent
 
 
