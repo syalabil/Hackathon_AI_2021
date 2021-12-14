@@ -6,6 +6,8 @@ Create folder on C: drive and put file in the folder
 Create Virtual Enviroment for flask application and download the packages using requirements.txt to run the application
 
 Start with login:
+
 Username - admin
+
 Password - password123
 
